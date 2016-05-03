@@ -7,8 +7,6 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 /**
  * @author Michiel Meeuwissen
  */
-@XmlAccessorType(XmlAccessType.NONE)
-@XmlType(name = "enumerType", propOrder = {"value"})
 @JsonPropertyOrder({"attribute", "value"})
 public class Wrapper {
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.AnnotationIntrospector;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -25,14 +26,15 @@ public class ATestClassTest {
 			new JacksonAnnotationIntrospector(),
 			new JaxbAnnotationIntrospector(mapper.getTypeFactory())
 		);
-
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
 
 		mapper.setAnnotationIntrospector(introspector);
 
 
         ATestClass instance = new ATestClass();
-		instance.collection = new ArrayList<MyEnum>();
-		instance.collection.add(MyEnum.A);
+		instance.collection = new ArrayList<String>();
+		instance.collection.add("A");
 
 		assertEquals("{\"objects\":[{\"attribute\":\"test\",\"value\":\"A\"}]}", mapper.writeValueAsString(instance));
 
